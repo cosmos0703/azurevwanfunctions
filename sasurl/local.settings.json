@@ -1,0 +1,7 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "MyCosmosDBConnectionString": "AccountEndpoint=https://plokeshhw1.documents.azure.com:443/;AccountKey=4lKQFA6hx8sjvEwKYdI20vlaMKprX1xsIvyWKsMDUQzN4xIAOHqF7bA5hUHI9naVQxrO2ji6TCxGY7jbNBiK5g==;"
+  }
+}

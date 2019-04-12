@@ -1,0 +1,22 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "name": "$return",
+      "type": "blob",
+      "path": "vpnsites/bloburl.txt",
+      "connection": "MyStorageConnectionString",
+      "direction": "out"
+    }
+  ]
+}
