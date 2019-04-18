@@ -343,6 +343,76 @@ def readjson():
     else:
         return 'Initial Site is not configured'
 
+def func_readjson():
+        config_url = download_config()
+        gcontext = ssl.SSLContext()
+        f = urlopen(config_url, context=gcontext)
+        content = f.read()
+        json_output = json.loads(content)
+    
+
+        vpn_sites = network_client.vpn_sites.list_by_resource_group(resource_group_name=RSG_HUB)
+
+        out_list = []
+        for i,j in enumerate(json_output):
+            iter= len(j['vpnSiteConnections'])
+        iterator = iter - 1
+
+
+        site_name_addr = []
+        site_addr_tmp = []
+        for i, Site in enumerate(vpn_sites):
+                site_name_addr.append({"Address_Space_Client":(Site.address_space.address_prefixes),
+                                  "Name":str(Site.name)})
+                site_addr_tmp.append(Site.address_space.address_prefixes)
+
+        site_addr= []
+        for sublist in site_addr_tmp:
+            for i in sublist:
+                site_addr.append(str(i))
+
+
+
+
+        for i,j in enumerate(json_output):
+            try:
+                out_list.append(
+                    {
+                        'Name':(str(j['vpnSiteConfiguration']['Name'])),
+                        'IPAddress':(str(j['vpnSiteConfiguration']['IPAddress'])),
+                        'Instance0': (str(j['vpnSiteConnections'][iterator]['gatewayConfiguration']['IpAddresses']['Instance0'])),
+                        'Instance1': (str(j['vpnSiteConnections'][iterator]['gatewayConfiguration']['IpAddresses']['Instance1'])),
+                        'PSK': str(j['vpnSiteConnections'][iterator]['connectionConfiguration']['PSK']),
+                        'SADataSizeInKilobytes': str(j['vpnSiteConnections'][iterator]['connectionConfiguration']['IPsecParameters']['SADataSizeInKilobytes']),
+                        'SALifeTimeInSeconds': str(j['vpnSiteConnections'][iterator]['connectionConfiguration']['IPsecParameters']['SALifeTimeInSeconds']),
+                        'Region': str(j['vpnSiteConnections'][iterator]['hubConfiguration']['Region']),
+                        'AddressSpace': str(j['vpnSiteConnections'][iterator]['hubConfiguration']['AddressSpace']),
+                        'Connected_Subnets':(j['vpnSiteConnections'][iterator]['hubConfiguration']['ConnectedSubnets'])
+                    })
+
+
+
+
+            except IndexError:
+                return out_list, site_addr
+
+        for list1_item in site_name_addr:
+                for list1_item_key in list(list1_item):
+                    #print (list1_item_key,list1_item[list1_item_key])
+                    for list2_item in out_list:
+                        for list2_item_key in list(list2_item):
+                            #print (list1_item_key,list2_item_key, list1_item[list1_item_key],list2_item[list2_item_key])
+                            if (list1_item_key in list(list2_item) and (
+                                    list1_item[list1_item_key] == list2_item[list2_item_key])):
+                                    #print ('I am here')
+                                    list2_item['Address_Space_Client']=list1_item['Address_Space_Client']
+
+        #out_list.append(temp_list)
+        #print(out_list)
+
+        return out_list,site_addr
+
+
 def completed_connections():
     writetofile()
     readjson()
@@ -379,29 +449,8 @@ def main(req: func.HttpRequest) ->  str:
 
     logging.info('Python HTTP trigger function processed a request. %s', req)
     ip = req.params.get('ip')
-    #ip_vpnsites = str(getip_vpnsites())
-    #ip_vpnsites_uni = str(ip_vpnsites, unicodedata)
-    #return(ip_vpnsites)
-    #ip_vpnsites = str(getip_vpnsites())
-    #vpnsites.set(ip_vpnsites)
+    t1, t2 = func_readjson()
+    print (t1, t2)
 
-    # Initilize fgt connection
-    fgt = fgt_api.FGT(ip)
-
-    # Hard coded vdom value for all requests
-    vdom = "root"
-
-    # Authenticate using login session
-    fgt.login("plokesh", "Fortinet1@34")
-
-    # Create object
-    fgt.post('/api/v2/cmdb/firewall/address',
-             params={'vdom': vdom},
-             data={'json': {'name': "attacker2",
-                            "subnet": "1.1.1.4 255.255.255.255"}},
-             verbose=True)
-
-    # Always logout after testing is done
-    fgt.logout()
     return('Test')
 

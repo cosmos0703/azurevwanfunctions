@@ -14,7 +14,7 @@ from azure.common.credentials import ServicePrincipalCredentials
 
 TENANT_ID = '942b80cd-1b14-42a1-8dcf-4b21dece61ba'
 
-# Your Service Principal App ID
+# Your Service Principal App ID 
 CLIENT = '4d966119-56a0-4e35-9692-7edd1e90c686'
 
 # Your Service Principal Password
