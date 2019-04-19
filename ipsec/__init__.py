@@ -348,7 +348,7 @@ def main(req: func.HttpRequest) ->  str:
                     #Checking to see if the FortiGate is configured if nothing exists or making changes to the existing Site
                     fgt = fgt_api.FGT(site_IPAddress)
                     fgt.login(site_user, site_password)
-                    vpn0= site_name + '0'
+                    vpn0 = site_name + '0'
                     vpn1 = site_name + '1'
                     vpn0_ph2 = vpn0 + '-ph2'
                     vpn1_ph2 = vpn1 + '-ph2'
@@ -491,7 +491,7 @@ def main(req: func.HttpRequest) ->  str:
                             for i in vpn_lookup['results']:
 
                             #if i['srcintf'][0]['name'] or i['dstintf'][0]['name']  in local_interfaces:
-                                if (i['srcintf'][0]['name'])  == phase1_0:
+                                if (i['srcintf'][0]['name'])  == vpn0:
 
                                     #print i['srcintf'][0]['name'], i['dstintf'][0]['name']
                                     src = i['srcaddr'][0]['name']
@@ -511,7 +511,7 @@ def main(req: func.HttpRequest) ->  str:
                                                             data = {'json': {'policyid': 0,
                                                                     'srcintf': [{'name': a['Interface']}],
                                                                     'srcaddr': [{'name': a['local_Address']}],
-                                                                    'dstintf': [{'name': phase1_0}],
+                                                                    'dstintf': [{'name': vpn0}],
                                                                     'dstaddr': [{'name': i}],
                                                                     'service': [{'name': "ALL"}],
                                                                     'schedule': "always",
@@ -522,7 +522,7 @@ def main(req: func.HttpRequest) ->  str:
                                                             data = {'json': {'policyid': 0,
                                                                     'srcintf': [{'name': a['Interface']}],
                                                                     'srcaddr': [{'name': a['local_Address']}],
-                                                                    'dstintf': [{'name': phase1_1}],
+                                                                    'dstintf': [{'name': vpn1}],
                                                                     'dstaddr': [{'name': i}],
                                                                     'service': [{'name': "ALL"}],
                                                                     'schedule': "always",
@@ -531,7 +531,7 @@ def main(req: func.HttpRequest) ->  str:
                                         fgt.post('/api/v2/cmdb/firewall/policy',
                                                             params = {'vdom': site_vdom},
                                                             data = {'json': {'policyid': 0,
-                                                                    'srcintf': [{'name': phase1_0}],
+                                                                    'srcintf': [{'name': vpn0}],
                                                                     'srcaddr': [{'name': i }],
                                                                     'dstintf': [{'name': a['Interface']}],
                                                                     'dstaddr': [{'name': a['local_Address']}],
@@ -542,7 +542,7 @@ def main(req: func.HttpRequest) ->  str:
                                         fgt.post('/api/v2/cmdb/firewall/policy',
                                                             params = {'vdom': site_vdom},
                                                             data = {'json': {'policyid': 0,
-                                                                    'srcintf': [{'name': phase1_1 }],
+                                                                    'srcintf': [{'name': vpn1 }],
                                                                     'srcaddr': [{'name': i }],
                                                                     'dstintf': [{'name': a['Interface']}],
                                                                     'dstaddr': [{'name': a['local_Address']}],
@@ -567,7 +567,7 @@ def main(req: func.HttpRequest) ->  str:
                                                             data = {'json': {'policyid': 0,
                                                                     'srcintf': [{'name': a['Interface']}],
                                                                     'srcaddr': [{'name': a['local_Address']}],
-                                                                    'dstintf': [{'name': phase1_0}],
+                                                                    'dstintf': [{'name': vpn0}],
                                                                     'dstaddr': [{'name': k}],
                                                                     'service': [{'name': "ALL"}],
                                                                     'schedule': "always",
@@ -578,7 +578,7 @@ def main(req: func.HttpRequest) ->  str:
                                                             data = {'json': {'policyid': 0,
                                                                     'srcintf': [{'name': a['Interface']}],
                                                                     'srcaddr': [{'name': a['local_Address']}],
-                                                                    'dstintf': [{'name': phase1_1}],
+                                                                    'dstintf': [{'name': vpn1}],
                                                                     'dstaddr': [{'name': k}],
                                                                     'service': [{'name': "ALL"}],
                                                                     'schedule': "always",
@@ -587,7 +587,7 @@ def main(req: func.HttpRequest) ->  str:
                                         fgt.post('/api/v2/cmdb/firewall/policy',
                                                             params = {'vdom': site_vdom},
                                                             data = {'json': {'policyid': 0,
-                                                                    'srcintf': [{'name': phase1_0}],
+                                                                    'srcintf': [{'name': vpn0}],
                                                                     'srcaddr': [{'name': k }],
                                                                     'dstintf': [{'name': a['Interface']}],
                                                                     'dstaddr': [{'name': a['local_Address']}],
@@ -598,7 +598,7 @@ def main(req: func.HttpRequest) ->  str:
                                         fgt.post('/api/v2/cmdb/firewall/policy',
                                                             params = {'vdom': site_vdom},
                                                             data = {'json': {'policyid': 0,
-                                                                    'srcintf': [{'name': phase1_1 }],
+                                                                    'srcintf': [{'name': vpn1 }],
                                                                     'srcaddr': [{'name': k }],
                                                                     'dstintf': [{'name': a['Interface']}],
                                                                     'dstaddr': [{'name': a['local_Address']}],

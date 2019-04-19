@@ -7028,11 +7028,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Praveen/plokeshfunctions/extensions.csproj",
+      "projectUniqueName": "/Users/Praveen/Documents/01-Azure/azurevwanfunctions/extensions.csproj",
       "projectName": "extensions",
-      "projectPath": "/Users/Praveen/plokeshfunctions/extensions.csproj",
+      "projectPath": "/Users/Praveen/Documents/01-Azure/azurevwanfunctions/extensions.csproj",
       "packagesPath": "/Users/Praveen/.nuget/packages/",
-      "outputPath": "/Users/Praveen/plokeshfunctions/obj/",
+      "outputPath": "/Users/Praveen/Documents/01-Azure/azurevwanfunctions/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
