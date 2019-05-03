@@ -12,17 +12,17 @@ from azure.common.credentials import ServicePrincipalCredentials
 
 #Your Subscription 
 
-TENANT_ID = '942b80cd-1b14-42a1-8dcf-4b21dece61ba'
+TENANT_ID = 'xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx'
 
 # Your Service Principal App ID
-CLIENT = '4d966119-56a0-4e35-9692-7edd1e90c686'
+CLIENT = 'xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx'
 
 # Your Service Principal Password
-KEY = 'GlfazBnkHuJYrE91wWgzYV+KdSOzc0Q3SEMIdkTPTRI='
+KEY = 'pwasswnklvnsdlkfnsdxxxxxxxx'
 
-SUB_ID='4f27b38c-ad3f-43d8-a9a3-01182e5e2f9a'
-RSG_HUB = 'plokeshWANTestRG'
-vWAN_NAME = 'plokeshvWAN'
+SUB_ID='xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx'
+RSG_HUB = 'resourcegp'
+vWAN_NAME = 'vWAN'
 location = 'uksouth'
 RSG = 'microsoft-network-' + location
 virtual_wan='/subscriptions/'+SUB_ID+'/resourceGroups/'+RSG_HUB+'/providers/Microsoft.Network/virtualWans/'+vWAN_NAME
